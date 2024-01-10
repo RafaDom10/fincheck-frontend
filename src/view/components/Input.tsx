@@ -29,3 +29,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ placeholder, na
       </div>
     )
   })
+Input.displayName = 'Input'

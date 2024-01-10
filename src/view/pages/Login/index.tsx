@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { useLoginController } from "./useLoginController";
 
 export function Login() {
-  const { register, handleSubmit } = useLoginController()
+  const { register, handleSubmit, errors } = useLoginController()
 
   return (
     <>
