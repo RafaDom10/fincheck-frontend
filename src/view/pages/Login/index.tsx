@@ -33,12 +33,14 @@ export function Login() {
         <Input
           type="email"
           placeholder="E-mail"
+          error={errors.email?.message}
           {...register('email')}
         />
 
         <Input
           type="password"
           placeholder="Senha"
+          error={errors.password?.message}
           {...register('password')}
         />
 
