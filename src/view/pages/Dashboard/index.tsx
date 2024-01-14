@@ -11,10 +11,10 @@ export function Dashboard() {
         <UserMenu />
       </header>
       <main className="flex-1 flex flex-col md:flex-row gap-4">
-        <div className="w-full h-full md:w-1/2">
+        <div className="md:w-1/2">
           <Accounts />
         </div>
-        <div className="w-full h-full md:w-1/2">
+        <div className="md:w-1/2">
           <Transactions />
         </div>
       </main>
