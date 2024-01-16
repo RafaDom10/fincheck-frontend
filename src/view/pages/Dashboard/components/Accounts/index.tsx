@@ -6,9 +6,16 @@ import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from './SliderNavigation';
 import { useAccountsController } from './useAccountsController';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { cn } from '../../../../../app/utils/cs';
 
 export function Accounts() {
-  const { sliderState, setSliderState, windowWidth } = useAccountsController()
+  const {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    areValuesIsVisible,
+    toggleValuesVisibility
+} = useAccountsController()
 
   return (
     <div className="bg-teal-900 rounded-2xl w-full h-full px-4 py-8 md:p-10 flex flex-col">
@@ -17,11 +24,14 @@ export function Accounts() {
           Saldo Total
         </span>
         <div className="flex items-center gap-2">
-          <strong className="text-2xl text-white tracking-[-1px]">
+          <strong className={cn(
+            "text-2xl text-white tracking-[-1px]",
+            !areValuesIsVisible && "blur-[10px]"
+          )}>
             {formatCurrency(1000.00)}
           </strong>
-          <button className="h-8 w-8 flex items-center justify-center">
-            <EyeIcon open={true} />
+          <button className="h-8 w-8 flex items-center justify-center" onClick={toggleValuesVisibility}>
+            <EyeIcon open={!areValuesIsVisible} />
           </button>
         </div>
       </div>
