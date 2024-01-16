@@ -5,6 +5,7 @@ import { EyeIcon } from "../../../../components/icons/EyeIcon";
 import { AccountCard } from "./AccountCard";
 import { SliderNavigation } from './SliderNavigation';
 import { useAccountsController } from './useAccountsController';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 
 export function Accounts() {
   const { sliderState, setSliderState, windowWidth } = useAccountsController()
@@ -17,7 +18,7 @@ export function Accounts() {
         </span>
         <div className="flex items-center gap-2">
           <strong className="text-2xl text-white tracking-[-1px]">
-            R$ 1000,00
+            {formatCurrency(1000.00)}
           </strong>
           <button className="h-8 w-8 flex items-center justify-center">
             <EyeIcon open={true} />
