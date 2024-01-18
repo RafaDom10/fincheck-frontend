@@ -10,12 +10,17 @@ import { CategoryIcon } from "../../../../components/icons/categories/CategoryIc
 import { cn } from "../../../../../app/utils/cs";
 import { useTransactionController } from "./useTransactionController";
 import { Spinner } from "../../../../components/Spinner";
+import emptyStateIllustration from "../../../../../assets/empty-state.svg"
 
 export function Transactions() {
-  const { areValuesIsVisible, isLoading } = useTransactionController()
+  const {
+    areValuesIsVisible,
+    isLoading,
+    transactions
+  } = useTransactionController()
 
   return (
-    <div className="bg-gray-100 rounded-2xl w-full h-full px-4 py-8 md:p-10 flex-col">
+    <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
       {isLoading && (
         <div className='flex items-center justify-center w-full h-full'>
           <Spinner className='w-10 h-10' />
@@ -53,38 +58,51 @@ export function Transactions() {
             </div>
           </header>
 
-          <div className="mt-4 space-y-2 flex-1 overflow-y-auto">
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex flex-1 items-center gap-3">
-                <CategoryIcon type="expense" />
-                <div>
-                  <strong className="text-gray-800 font-bold tracking-[-0.5px] block">Almoço</strong>
-                  <small className="text-sm text-gray-600">04/06/2023</small>
-                </div>
+          <div className="mt-4 space-y-2 overflow-y-auto flex-1">
+            {transactions.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full">
+                <img src={emptyStateIllustration} />
+                <p className="text-gray-700">
+                  Não encontramos nenhuma transação!
+                </p>
               </div>
-              <span className={cn(
-                "text-red-800 font-medium tracking-[-0.5px]",
-                !areValuesIsVisible && 'blur-[10px]'
-              )}>
-                - {formatCurrency(1320.00)}
-              </span>
-            </div>
+            )}
 
-            <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
-              <div className="flex flex-1 items-center gap-3">
-                <CategoryIcon type="income" />
-                <div>
-                  <strong className="text-gray-800 font-bold tracking-[-0.5px] block">Freelance</strong>
-                  <small className="text-sm text-gray-600">04/06/2023</small>
+            {transactions.length > 0 && (
+              <>
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex flex-1 items-center gap-3">
+                    <CategoryIcon type="expense" />
+                    <div>
+                      <strong className="text-gray-800 font-bold tracking-[-0.5px] block">Almoço</strong>
+                      <small className="text-sm text-gray-600">04/06/2023</small>
+                    </div>
+                  </div>
+                  <span className={cn(
+                    "text-red-800 font-medium tracking-[-0.5px]",
+                    !areValuesIsVisible && 'blur-[10px]'
+                  )}>
+                    - {formatCurrency(1320.00)}
+                  </span>
                 </div>
-              </div>
-              <span className={cn(
-                "text-green-800 font-medium tracking-[-0.5px]",
-                !areValuesIsVisible && 'blur-[10px]'
-              )}>
-                + {formatCurrency(1320.00)}
-              </span>
-            </div>
+
+                <div className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4">
+                  <div className="flex flex-1 items-center gap-3">
+                    <CategoryIcon type="income" />
+                    <div>
+                      <strong className="text-gray-800 font-bold tracking-[-0.5px] block">Freelance</strong>
+                      <small className="text-sm text-gray-600">04/06/2023</small>
+                    </div>
+                  </div>
+                  <span className={cn(
+                    "text-green-800 font-medium tracking-[-0.5px]",
+                    !areValuesIsVisible && 'blur-[10px]'
+                  )}>
+                    + {formatCurrency(1320.00)}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
         </>
       )}
