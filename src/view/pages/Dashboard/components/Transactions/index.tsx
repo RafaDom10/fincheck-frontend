@@ -1,28 +1,33 @@
-import { FilterIcon } from "../../../../components/icons/FilterIcon";
-import { SwiperSlide, Swiper } from "swiper/react";
-import { MONTHS } from "../../../../../app/config/constants";
-import { SlideOptions } from "./SliderOptions";
-import { SliderNavigation } from "./SliderNavigation";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
-import { cn } from "../../../../../app/utils/cs";
-import { useTransactionController } from "./useTransactionController";
-import { Spinner } from "../../../../components/Spinner";
-import emptyStateIllustration from "../../../../../assets/empty-state.svg"
-import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
+import { FilterIcon } from '../../../../components/icons/FilterIcon'
+import { SwiperSlide, Swiper } from 'swiper/react'
+import { MONTHS } from '../../../../../app/config/constants'
+import { SlideOptions } from './SliderOptions'
+import { SliderNavigation } from './SliderNavigation'
+import { formatCurrency } from '../../../../../app/utils/formatCurrency'
+import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon'
+import { cn } from '../../../../../app/utils/cs'
+import { useTransactionController } from './useTransactionController'
+import { Spinner } from '../../../../components/Spinner'
+import emptyStateIllustration from '../../../../../assets/empty-state.svg'
+import { TransactionTypeDropdown } from './TransactionTypeDropdown'
+import { FiltersModal } from './FiltersModal'
 
-export function Transactions() {
+export function Transactions () {
   const {
     areValuesIsVisible,
     isInitialLoading,
     transactions,
-    isLoading
+    isLoading,
+    isFiltersModalOpen,
+    handleCloseFiltersModal,
+    handleOpenFiltersModal
   } = useTransactionController()
 
   const hasTransactions = transactions.length > 0
 
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
+
       {isInitialLoading && (
         <div className='flex items-center justify-center w-full h-full'>
           <Spinner className='w-10 h-10' />
@@ -31,10 +36,13 @@ export function Transactions() {
 
       {!isInitialLoading && (
         <>
+
+          <FiltersModal open={isFiltersModalOpen} onClose={handleCloseFiltersModal} />
+
           <header>
             <div className="flex items-center justify-between">
-             <TransactionTypeDropdown />
-              <button>
+              <TransactionTypeDropdown />
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
             </div>
@@ -83,7 +91,7 @@ export function Transactions() {
                     </div>
                   </div>
                   <span className={cn(
-                    "text-red-800 font-medium tracking-[-0.5px]",
+                    'text-red-800 font-medium tracking-[-0.5px]',
                     !areValuesIsVisible && 'blur-[10px]'
                   )}>
                     - {formatCurrency(1320.00)}
@@ -99,7 +107,7 @@ export function Transactions() {
                     </div>
                   </div>
                   <span className={cn(
-                    "text-green-800 font-medium tracking-[-0.5px]",
+                    'text-green-800 font-medium tracking-[-0.5px]',
                     !areValuesIsVisible && 'blur-[10px]'
                   )}>
                     + {formatCurrency(1320.00)}

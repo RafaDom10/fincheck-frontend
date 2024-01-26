@@ -7,11 +7,12 @@ interface ModalProps {
   children: React.ReactNode
   title: string
   rightAction?: React.ReactNode
+  onClose?(): void
 }
 
-export function Modal({ open, children, title, rightAction }: ModalProps) {
+export function Modal ({ open, children, onClose, title, rightAction }: ModalProps) {
   return (
-    <Dialog.Root open={open}>
+    <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
         <Dialog.Overlay className={cn(
           'fixed z-50 inset-0 bg-black/80 backdrop-blur-sm',
@@ -26,7 +27,10 @@ export function Modal({ open, children, title, rightAction }: ModalProps) {
         >
 
           <header className="h-12 flex items-center justify-between text-gray-800">
-            <button className='h-12 w-12'>
+            <button
+              className='h-12 w-12 flex items-center justify-center outline-none'
+              onClick={onClose}
+            >
               <Cross2Icon className='w-6 h-6' />
             </button>
 

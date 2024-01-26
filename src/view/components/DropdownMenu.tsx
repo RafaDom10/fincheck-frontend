@@ -1,6 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
-import * as RdxDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { cn } from '../../app/utils/cs';
+import * as RdxDropdownMenu from '@radix-ui/react-dropdown-menu'
+import { cn } from '../../app/utils/cs'
 
 function DropdownMenuRoot ({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +11,7 @@ function DropdownMenuRoot ({ children }: { children: React.ReactNode }) {
 
 function DropdownMenuTrigger ({ children }: { children: React.ReactNode }) {
   return (
-    <RdxDropdownMenu.Trigger className='outline-none'>
+    <RdxDropdownMenu.Trigger className='outline-none' asChild>
       { children }
     </RdxDropdownMenu.Trigger>
   )
@@ -45,7 +44,7 @@ interface DropdownMenuItemProps {
   onSelect?(): void
 }
 
-function DropdownMenuItem ({ children, className , onSelect}: DropdownMenuItemProps) {
+function DropdownMenuItem ({ children, className, onSelect }: DropdownMenuItemProps) {
   return (
     <RdxDropdownMenu.Item
       onSelect={onSelect}

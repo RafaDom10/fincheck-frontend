@@ -1,9 +1,9 @@
-import { PlusIcon } from "@radix-ui/react-icons";
-import { DropdownMenu } from "../../../../components/DropdownMenu";
-import { BankAccountIcon } from "../../../../components/icons/BankAccountIcon";
-import { CategoryIcon } from "../../../../components/icons/categories/CategoryIcon";
+import { PlusIcon } from '@radix-ui/react-icons'
+import { DropdownMenu } from '../../../../components/DropdownMenu'
+import { BankAccountIcon } from '../../../../components/icons/BankAccountIcon'
+import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon'
 
-export function Fab() {
+export function Fab () {
   return (
     <div className="fixed right-4 bottom-4">
       <DropdownMenu.Root>
