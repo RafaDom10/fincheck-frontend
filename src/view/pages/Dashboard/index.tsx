@@ -1,11 +1,12 @@
-import { Logo } from "../../components/Logo";
-import { UserMenu } from "../../components/UserMenu";
-import { Accounts } from "./components/Accounts";
-import { DashboardProvider } from "./components/DashboardContext";
-import { Fab } from "./components/Fab";
-import { Transactions } from "./components/Transactions";
+import { Logo } from '../../components/Logo'
+import { UserMenu } from '../../components/UserMenu'
+import { Accounts } from './components/Accounts'
+import { DashboardProvider } from './components/DashboardContext'
+import { Fab } from './components/Fab'
+import { Transactions } from './components/Transactions'
+import { NewAccountModal } from './modals/NewAccountModal'
 
-export function Dashboard() {
+export function Dashboard () {
   return (
     <DashboardProvider>
       <div className="h-full w-full p-4 md:p-8 md:pt-6 flex flex-col gap-4">
@@ -23,6 +24,7 @@ export function Dashboard() {
         </main>
 
         <Fab />
+        <NewAccountModal />
       </div>
     </DashboardProvider>
   )
