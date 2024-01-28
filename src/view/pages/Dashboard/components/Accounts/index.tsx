@@ -1,16 +1,16 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { EyeIcon } from "../../../../components/icons/EyeIcon";
-import { AccountCard } from "./AccountCard";
-import { SliderNavigation } from './SliderNavigation';
-import { useAccountsController } from './useAccountsController';
-import { formatCurrency } from '../../../../../app/utils/formatCurrency';
-import { cn } from '../../../../../app/utils/cs';
-import { Spinner } from '../../../../components/Spinner';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { EyeIcon } from '../../../../components/icons/EyeIcon'
+import { AccountCard } from './AccountCard'
+import { SliderNavigation } from './SliderNavigation'
+import { useAccountsController } from './useAccountsController'
+import { formatCurrency } from '../../../../../app/utils/formatCurrency'
+import { cn } from '../../../../../app/utils/cs'
+import { Spinner } from '../../../../components/Spinner'
+import { PlusIcon } from '@radix-ui/react-icons'
 
-export function Accounts() {
+export function Accounts () {
   const {
     sliderState,
     setSliderState,
@@ -18,7 +18,8 @@ export function Accounts() {
     areValuesIsVisible,
     toggleValuesVisibility,
     isLoading,
-    accounts
+    accounts,
+    openNewAccountModal
   } = useAccountsController()
 
   return (
@@ -37,8 +38,8 @@ export function Accounts() {
             </span>
             <div className="flex items-center gap-2">
               <strong className={cn(
-                "text-2xl text-white tracking-[-1px]",
-                !areValuesIsVisible && "blur-[10px]"
+                'text-2xl text-white tracking-[-1px]',
+                !areValuesIsVisible && 'blur-[10px]'
               )}>
                 {formatCurrency(1000.00)}
               </strong>
@@ -57,9 +58,12 @@ export function Accounts() {
                   </strong>
                 </div>
 
-                <button className='flex flex-col items-center justify-center gap-4 mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600'>
+                <button
+                  className='flex flex-col items-center justify-center gap-4 mt-4 h-52 rounded-2xl border-2 border-dashed border-teal-600'
+                  onClick={openNewAccountModal}
+                >
                   <div className='flex items-center justify-center border-2 border-dashed w-11 h-11 rounded-full'>
-                    <PlusIcon className='text-white w-6 h-6'/>
+                    <PlusIcon className='text-white w-6 h-6' />
                   </div>
                   <span className='text-white font-medium tracking-[-0.5px] block w-32 text-center'>
                     Cadastre uma nova conta
