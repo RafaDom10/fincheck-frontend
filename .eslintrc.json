@@ -21,6 +21,7 @@
       "react/react-in-jsx-scope": "off",
       "@typescript-eslint/method-signature-style": "off",
       "@typescript-eslint/consistent-type-assertions": "off",
-      "@typescript-eslint/unbound-method": "off"
+      "@typescript-eslint/unbound-method": "off",
+      "@typescript-eslint/strict-boolean-expressions": "off"
     }
 }
