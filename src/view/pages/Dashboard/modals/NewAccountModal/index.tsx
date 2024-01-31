@@ -1,3 +1,4 @@
+import { Button } from '../../../../components/Button'
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdownInput'
 import { Input } from '../../../../components/Input'
 import { InputCurrency } from '../../../../components/InputCurrency'
@@ -56,6 +57,10 @@ export function NewAccountModal () {
           />
 
           <ColorsDropdownInput />
+
+          <Button>
+            Criar
+          </Button>
         </div>
       </form>
     </Modal>
