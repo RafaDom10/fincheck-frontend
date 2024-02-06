@@ -21,7 +21,7 @@ export function NewAccountModal () {
       <form>
         <div >
           <span className='text-gray-600 tracking-[-0.5px] text-xs'>
-            Saldo
+            Saldo inicial
           </span>
           <div className='flex items-center gap-2'>
             <span className='text-gray-600 tracking-[-0.5px] text-lg'>
