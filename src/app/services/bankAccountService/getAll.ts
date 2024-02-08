@@ -1,6 +1,6 @@
 import { httpClient } from '../HttpClient'
 
-interface BankAccountResponse {
+type BankAccountResponse = Array<{
   id: string
   userId: string
   name: string
@@ -8,7 +8,7 @@ interface BankAccountResponse {
   type: 'INVESTMENT' | 'CHECKING' | 'CASH'
   color: string
   currentBalance: number
-}
+}>
 
 export async function getAll () {
   const { data } = await httpClient.get<BankAccountResponse>('/bank-accounts')

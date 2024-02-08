@@ -6,7 +6,7 @@ import { AccountCard } from './AccountCard'
 import { SliderNavigation } from './SliderNavigation'
 import { useAccountsController } from './useAccountsController'
 import { formatCurrency } from '../../../../../app/utils/formatCurrency'
-import { cn } from '../../../../../app/utils/cs'
+import { cn } from '../../../../../app/utils/cn'
 import { Spinner } from '../../../../components/Spinner'
 import { PlusIcon } from '@radix-ui/react-icons'
 
@@ -96,30 +96,16 @@ export function Accounts () {
                       />
                     </div>
 
-                    <SwiperSlide>
+                    {accounts.map(account => (
+                      <SwiperSlide key={account.id}>
                       <AccountCard
-                        color="#7950F2"
-                        name="Nubank"
-                        balance={1000.90}
-                        type="CASH"
+                        color={account.color}
+                        name={account.name}
+                        balance={account.currentBalance}
+                        type={account.type}
                       />
                     </SwiperSlide>
-                    <SwiperSlide>
-                      <AccountCard
-                        color="#7950F2"
-                        name="Nubank"
-                        balance={1000.90}
-                        type="CASH"
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <AccountCard
-                        color="#7950F2"
-                        name="Nubank"
-                        balance={1000.90}
-                        type="CASH"
-                      />
-                    </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
               </>

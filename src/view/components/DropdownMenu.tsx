@@ -1,5 +1,5 @@
 import * as RdxDropdownMenu from '@radix-ui/react-dropdown-menu'
-import { cn } from '../../app/utils/cs'
+import { cn } from '../../app/utils/cn'
 
 function DropdownMenuRoot ({ children }: { children: React.ReactNode }) {
   return (

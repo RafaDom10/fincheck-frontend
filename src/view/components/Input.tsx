@@ -1,5 +1,5 @@
 import { type ComponentProps, forwardRef } from 'react'
-import { cn } from '../../app/utils/cs'
+import { cn } from '../../app/utils/cn'
 import { HelperTextError } from './HelperTextError'
 
 interface InputProps extends ComponentProps<'input'> {

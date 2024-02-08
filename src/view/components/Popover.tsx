@@ -1,5 +1,5 @@
 import * as RdxPopover from '@radix-ui/react-popover'
-import { cn } from '../../app/utils/cs'
+import { cn } from '../../app/utils/cn'
 
 function PopoverRoot ({ children }: { children: React.ReactNode }) {
   return (

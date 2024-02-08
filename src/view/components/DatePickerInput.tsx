@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { cn } from '../../app/utils/cs'
+import { cn } from '../../app/utils/cn'
 import { HelperTextError } from './HelperTextError'
 import { formatDate } from '../../app/utils/formatDate'
 import { Popover } from './Popover'

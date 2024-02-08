@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { cn } from '../../app/utils/cs'
+import { cn } from '../../app/utils/cn'
 import { DropdownMenu } from './DropdownMenu'
 import { HelperTextError } from './HelperTextError'
 import { ColorIcon } from './icons/ColorIcon'
