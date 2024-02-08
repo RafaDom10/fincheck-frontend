@@ -49,7 +49,12 @@ export function useNewAccountModalController () {
 
       toast.success('Conta cadastrada com sucesso!')
       closeNewAccountModal()
-      reset()
+      reset({
+        initialBalance: '0',
+        name: '',
+        type: 'CHECKING',
+        color: ''
+      })
     } catch {
       toast.error('Erro ao cadastrar conta.')
     }
