@@ -7,6 +7,7 @@ import { Modal } from "../../../../components/Modal";
 import { Select } from "../../../../components/Select";
 import { useEditAccountModalController } from "./useEditAccountModalController";
 import { TrashIcon } from "../../../../components/icons/TrashIcon";
+import { ConfirmDeleteModal } from "../../../../components/ConfirmDeleteModal";
 
 export function EditAccountModal() {
   const {
@@ -17,7 +18,14 @@ export function EditAccountModal() {
     register,
     control,
     isLoading,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal
   } = useEditAccountModalController();
+
+  if (isDeleteModalOpen) {
+    return <ConfirmDeleteModal onClose={handleCloseDeleteModal} />
+  }
 
   return (
     <Modal
@@ -25,8 +33,8 @@ export function EditAccountModal() {
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
       rightAction={(
-        <button >
-          <TrashIcon className="text-red-900 w-6 h-6"/>
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className="text-red-900 w-6 h-6" />
         </button>
       )}
     >
