@@ -1,6 +1,6 @@
-import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { NumericFormat } from 'react-number-format';
 import { cn } from '../../app/utils/cn';
+import { HelperTextError } from './HelperTextError';
 
 interface InputCurrencyProps {
   error?: string;
@@ -12,8 +12,7 @@ export function InputCurrency({ error, value, onChange }: InputCurrencyProps) {
   return (
     <div>
       <NumericFormat
-        thousandSeparator="."
-        decimalSeparator=","
+        decimalSeparator=','
         value={value}
         onChange={event => onChange?.(event.target.value)}
         className={cn(
@@ -22,12 +21,7 @@ export function InputCurrency({ error, value, onChange }: InputCurrencyProps) {
         )}
       />
 
-      {error && (
-        <div className="flex gap-2 items-center mt-2 text-red-900">
-          <CrossCircledIcon />
-          <span className="text-xs">{error}</span>
-        </div>
-      )}
+      {error && <HelperTextError error={error} />}
     </div>
   )
 }
