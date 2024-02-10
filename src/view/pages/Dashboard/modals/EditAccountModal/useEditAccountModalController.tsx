@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { z } from 'zod'
 import { useDashboard } from '../../components/DashboardContext/useDashboard'
 import { useForm } from 'react-hook-form'
@@ -41,6 +42,8 @@ export function useEditAccountModalController () {
     }
   })
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
   const queryClient = useQueryClient()
 
   const { isLoading, mutateAsync } = useMutation({
@@ -64,6 +67,14 @@ export function useEditAccountModalController () {
     }
   })
 
+  function handleOpenDeleteModal () {
+    setIsDeleteModalOpen(true)
+  }
+
+  function handleCloseDeleteModal () {
+    setIsDeleteModalOpen(false)
+  }
+
   return {
     isEditAccountModalOpen,
     closeEditAccountModal,
@@ -71,6 +82,9 @@ export function useEditAccountModalController () {
     errors,
     handleSubmit,
     control,
-    isLoading
+    isLoading,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal
   }
 }
