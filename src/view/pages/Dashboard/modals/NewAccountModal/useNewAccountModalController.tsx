@@ -8,7 +8,10 @@ import toast from 'react-hot-toast'
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber'
 
 const schema = z.object({
-  initialBalance: z.string().min(1, 'Saldo inicial é obrigatório'),
+  initialBalance: z.union([
+    z.string().min(1, 'Saldo inicial é obrigatório'),
+    z.number()
+  ]),
   name: z.string().min(1, 'Nome da conta é obrigatório'),
   type: z.enum(['CHECKING', 'INVESTMENT', 'CASH']),
   color: z.string().min(1, 'Cor é obrigatória')
