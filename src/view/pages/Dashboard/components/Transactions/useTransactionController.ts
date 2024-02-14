@@ -20,11 +20,15 @@ export function useTransactionController () {
     refetch()
   }, [filters, refetch])
 
-  function handleChangeMonth (month: number) {
-    setFilters(prevState => ({
-      ...prevState,
-      month
-    }))
+  function handleChangeFilters<T extends keyof TransactionsFilters>(filter: T) {
+    return ( value: TransactionsFilters[T] ) => {
+      if (value === filters[filter]) return
+
+      setFilters(prevState => ({
+        ...prevState,
+        [filter]: value
+      }))
+    }
   }
 
   function handleOpenFiltersModal () {
@@ -43,7 +47,7 @@ export function useTransactionController () {
     handleOpenFiltersModal,
     handleCloseFiltersModal,
     isFiltersModalOpen,
-    handleChangeMonth,
+    handleChangeFilters,
     filters
   }
 }
