@@ -3,7 +3,7 @@ import { useDashboard } from '../../components/DashboardContext/useDashboard'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import toast from 'react-hot-toast'
-import { useBankAccount } from '../../../../../app/hooks/useBankAccounts'
+import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts'
 import { useCategories } from '../../../../../app/hooks/useCategories'
 import { useMemo } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -37,7 +37,7 @@ export function useNewTransactionModalController () {
     resolver: zodResolver(schema)
   })
 
-  const { accounts } = useBankAccount()
+  const { accounts } = useBankAccounts()
   const { categories: categoriesList } = useCategories()
   const queryClient = useQueryClient()
   const { isLoading, mutateAsync } = useMutation({

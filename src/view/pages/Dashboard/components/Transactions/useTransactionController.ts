@@ -3,7 +3,7 @@ import { useDashboard } from '../DashboardContext/useDashboard'
 import { useTransactions } from '../../../../../app/hooks/useTransactions'
 import { TransactionsFilters } from '../../../../../app/services/transactionsService/getAll'
 
-export function useTransactionController () {
+export function useTransactionController() {
   const { areValuesIsVisible } = useDashboard()
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
@@ -21,7 +21,7 @@ export function useTransactionController () {
   }, [filters, refetch])
 
   function handleChangeFilters<T extends keyof TransactionsFilters>(filter: T) {
-    return ( value: TransactionsFilters[T] ) => {
+    return (value: TransactionsFilters[T]) => {
       if (value === filters[filter]) return
 
       setFilters(prevState => ({
@@ -31,11 +31,19 @@ export function useTransactionController () {
     }
   }
 
-  function handleOpenFiltersModal () {
+  function handleApplyFilters(
+    { bankAccountId, year }: { bankAccountId: string | undefined, year: number }
+  ) {
+    handleChangeFilters('bankAccountId')(bankAccountId)
+    handleChangeFilters('year')(year)
+    setIsFiltersModalOpen(false)
+  }
+
+  function handleOpenFiltersModal() {
     setIsFiltersModalOpen(true)
   }
 
-  function handleCloseFiltersModal () {
+  function handleCloseFiltersModal() {
     setIsFiltersModalOpen(false)
   }
 
@@ -48,6 +56,7 @@ export function useTransactionController () {
     handleCloseFiltersModal,
     isFiltersModalOpen,
     handleChangeFilters,
-    filters
+    filters,
+    handleApplyFilters
   }
 }
