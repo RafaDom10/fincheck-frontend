@@ -63,6 +63,7 @@ export function useEditTransactionModalController(
       })
 
       queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
 
       toast.success('Transação atualizada com sucesso.')
       onClose()
@@ -93,6 +94,7 @@ export function useEditTransactionModalController(
       await removeTransaction(transaction!.id)
 
       void queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      void queryClient.invalidateQueries({ queryKey: ['bankAccounts'] })
 
       toast.success('Transação removida com sucesso!')
       onClose()
