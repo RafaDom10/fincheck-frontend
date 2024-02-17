@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts'
 import { useCategories } from '../../../../../app/hooks/useCategories'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Transaction } from '../../../../../app/entities/Transaction'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { transactionService } from '../../../../../app/services/transactionsService'
@@ -50,6 +50,8 @@ export function useEditTransactionModalController(
     mutationFn: transactionService.update
   })
 
+  const [isDeleteModalOpen, setIDeleteModalOpen] = useState(false)
+
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
       await mutateAsync({
@@ -74,6 +76,31 @@ export function useEditTransactionModalController(
     return categoriesList.filter(category => category.type === transaction?.type)
   }, [categoriesList, transaction])
 
+  function handleCloseDeleteModal () {
+    setIDeleteModalOpen(false)
+  }
+
+  function handleOpenDeleteModal () {
+    setIDeleteModalOpen(true)
+  }
+
+  const { isLoading: isLoadingDelete, mutateAsync: removeTransaction } = useMutation({
+    mutationFn: transactionService.remove
+  })
+
+  async function handleDeleteTransaction () {
+    try {
+      await removeTransaction(transaction!.id)
+
+      void queryClient.invalidateQueries({ queryKey: ['transactions'] })
+
+      toast.success('Transação removida com sucesso!')
+      onClose()
+    } catch {
+      toast.error('Erro ao remover a transação.')
+    }
+  }
+
   return {
     register,
     control,
@@ -81,6 +108,11 @@ export function useEditTransactionModalController(
     handleSubmit,
     accounts,
     categories,
-    isLoading
+    isLoading,
+    isDeleteModalOpen,
+    isLoadingDelete,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
+    handleDeleteTransaction
   }
 }
