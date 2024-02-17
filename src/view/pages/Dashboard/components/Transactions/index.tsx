@@ -12,6 +12,7 @@ import emptyStateIllustration from '../../../../../assets/empty-state.svg'
 import { TransactionTypeDropdown } from './TransactionTypeDropdown'
 import { FiltersModal } from './FiltersModal'
 import { formatDate } from '../../../../../app/utils/formatDate'
+import { EditTransactionsModal } from '../../modals/EditTransactionsModal'
 
 export function Transactions() {
   const {
@@ -24,7 +25,11 @@ export function Transactions() {
     handleOpenFiltersModal,
     handleChangeFilters,
     filters,
-    handleApplyFilters
+    handleApplyFilters,
+    handleOpenTransactionModal,
+    handleCloseTransactionModal,
+    isEditModalOpen,
+    transactionBeingEdited
   } = useTransactionController()
 
   const hasTransactions = transactions.length > 0
@@ -98,36 +103,50 @@ export function Transactions() {
               </div>
             )}
 
-            {(hasTransactions && !isLoading) && transactions.map(transaction => (
-              <div
-                key={transaction.id}
-                className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
-              >
-                <div className="flex flex-1 items-center gap-3">
-                  <CategoryIcon
-                    type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
-                    category={transaction.category?.icon}
+            {(hasTransactions && !isLoading) &&
+              <>
+                {transactionBeingEdited && (
+                  <EditTransactionsModal
+                    open={isEditModalOpen}
+                    onClose={handleCloseTransactionModal}
+                    transaction={transactionBeingEdited}
                   />
+                )}
 
-                  <div>
-                    <strong className="text-gray-800 font-bold tracking-[-0.5px] block">
-                      {transaction.name}
-                    </strong>
-                    <small className="text-sm text-gray-600">
-                      {formatDate(new Date(transaction.date))}
-                    </small>
+                {transactions.map(transaction => (
+                  <div
+                    key={transaction.id}
+                    className="bg-white p-4 rounded-2xl flex items-center justify-between gap-4"
+                    role='button'
+                    onClick={() => handleOpenTransactionModal(transaction)}
+                  >
+                    <div className="flex flex-1 items-center gap-3">
+                      <CategoryIcon
+                        type={transaction.type === 'EXPENSE' ? 'expense' : 'income'}
+                        category={transaction.category?.icon}
+                      />
+
+                      <div>
+                        <strong className="text-gray-800 font-bold tracking-[-0.5px] block">
+                          {transaction.name}
+                        </strong>
+                        <small className="text-sm text-gray-600">
+                          {formatDate(new Date(transaction.date))}
+                        </small>
+                      </div>
+                    </div>
+                    <span className={cn(
+                      'font-medium tracking-[-0.5px]',
+                      transaction.type === 'EXPENSE' ? 'text-red-800' : 'text-green-800',
+                      !areValuesIsVisible && 'blur-[10px]'
+                    )}>
+                      {transaction.type === 'EXPENSE' ? '- ' : '+ '}
+                      {formatCurrency(transaction.value)}
+                    </span>
                   </div>
-                </div>
-                <span className={cn(
-                  'font-medium tracking-[-0.5px]',
-                  transaction.type === 'EXPENSE' ? 'text-red-800' : 'text-green-800',
-                  !areValuesIsVisible && 'blur-[10px]'
-                )}>
-                  {transaction.type === 'EXPENSE' ? '- ' : '+ '}
-                  {formatCurrency(transaction.value)}
-                </span>
-              </div>
-            ))}
+                ))}
+              </>
+            }
           </div>
         </>
       )}

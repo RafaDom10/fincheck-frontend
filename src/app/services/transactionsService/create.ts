@@ -1,6 +1,6 @@
 import { httpClient } from "../HttpClient"
 
-interface TransactionsParams {
+interface CreateTransactionsParams {
   bankAccountId: string
   categoryId: string
   name: string
@@ -9,7 +9,7 @@ interface TransactionsParams {
   type: 'INCOME' | 'EXPENSE'
 }
 
-export async function create (params: TransactionsParams) {
+export async function create (params: CreateTransactionsParams) {
   const { data } = await httpClient.post('/transactions', params)
   return data
 }
